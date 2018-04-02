@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hu.hy.repository.GrowRecordRepository">
+    <resultMap id="m_grow_record" type="com.hu.hy.domain.GrowRecord">
+        <id column="f_id" property="id"/>
+        <result column="f_start_time" property="startTime"/>
+        <result column="f_end_time" property="endTime"/>
+        <result column="f_count" property="count"/>
+    </resultMap>
+    <insert id="create" parameterType="com.hu.hy.domain.GrowRecord">
+insert into m_grow_record ( f_id,f_start_time,f_end_time,f_count)
+values (#{id,jdbcType=INTEGER},#{startTime,jdbcType=BIGINT},#{endTime,jdbcType=BIGINT},#{count,jdbcType=INTEGER})
+</insert>
+    <select id="list" resultMap="m_grow_record">
+select * from m_grow_record where <![CDATA[ f_start_time>=#{startTime} and f_end_time<=#{endTime}]]>
+</select>
+    <select id="getCount" resultType="int">select count(f_id) FROM m_grow_record</select>
+    <select id="getMaxId" resultType="int">select IFNULL(max(f_id),10000) FROM m_grow_record</select>
+    <select id="findByTime" resultMap="m_grow_record">
+        select * from m_grow_record where f_start_time=#{start} and f_end_time=#{end}
+    </select>
+</mapper>

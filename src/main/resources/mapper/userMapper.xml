@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hu.hy.repository.UserRepository">
+    <resultMap id="m_user" type="com.hu.hy.domain.User">
+        <result column="f_unionid" property="unionid"/>
+        <result column="f_openid" property="openid"/>
+        <result column="f_nickname" property="nickname"/>
+        <result column="f_sex" property="sex"/>
+        <result column="f_province" property="province"/>
+        <result column="f_city" property="city"/>
+        <result column="f_country" property="country"/>
+        <result column="f_headimgurl" property="headimgurl"/>
+        <result column="f_weixin_no" property="weixinNo"/>
+        <result column="f_code_url" property="codeUrl"/>
+        <result column="f_introduction" property="introduction"/>
+        <result column="f_label" property="label"/>
+        <result column="f_count" property="count"/>
+        <result column="f_register_time" property="registerTime"/>
+        <result column="f_status" property="status"/>
+    </resultMap>
+    <insert id="create" parameterType="com.hu.hy.domain.User">
+insert into m_user ( f_unionid,f_openid,f_nickname,f_sex,f_province,f_city,f_country,
+f_headimgurl,f_weixin_no,f_code_url,f_introduction,f_label,f_count,f_register_time,f_status)
+ values (#{unionid,jdbcType=VARCHAR},#{openid,jdbcType=VARCHAR},#{nickname,jdbcType=VARCHAR},#{sex,jdbcType=INTEGER},
+ #{province,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},#{country,jdbcType=VARCHAR},#{headimgurl,jdbcType=VARCHAR},
+#{weixinNo,jdbcType=VARCHAR},#{codeUrl,jdbcType=VARCHAR},#{introduction,jdbcType=VARCHAR},
+ #{label,jdbcType=VARCHAR},#{count,jdbcType=INTEGER},#{registerTime,jdbcType=BIGINT},
+ #{status,jdbcType=VARCHAR})
+ </insert>
+    <update id="update" parameterType="com.hu.hy.domain.User">
+update m_user set f_unionid=#{unionid,jdbcType=VARCHAR},f_openid=#{openid,jdbcType=VARCHAR},
+f_nickname=#{nickname,jdbcType=VARCHAR},f_sex=#{sex,jdbcType=INTEGER},f_province=#{province,jdbcType=VARCHAR},
+f_city=#{city,jdbcType=VARCHAR},f_country=#{country,jdbcType=VARCHAR},f_headimgurl=#{headimgurl,jdbcType=VARCHAR},
+f_weixin_no=#{weixinNo,jdbcType=VARCHAR},f_code_url=#{codeUrl,jdbcType=VARCHAR},
+f_introduction=#{introduction,jdbcType=VARCHAR},f_label=#{label,jdbcType=VARCHAR},f_count=#{count,jdbcType=INTEGER},
+f_register_time=#{registerTime,jdbcType=BIGINT},f_status=#{status,jdbcType=VARCHAR}
+where f_openid=#{openid}</update>
+    <select id="list" resultMap="m_user">select * from m_user order by f_openid limit #{start},#{size}</select>
+    <select id="findByOpenId" resultMap="m_user">select * from m_user where f_openid=#{openid}</select>
+    <select id="getCount" resultType="int">select count(f_openid) FROM m_user</select>
+    <update id="updateStatus">
+        UPDATE m_user set f_status=#{status,jdbcType=VARCHAR} WHERE f_openid=#{openid}
+    </update>
+</mapper>

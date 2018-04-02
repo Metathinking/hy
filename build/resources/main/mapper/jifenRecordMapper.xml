@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hu.hy.repository.JifenRecordRepository">
+    <resultMap id="m_jifen_record" type="com.hu.hy.domain.JifenRecord">
+        <id column="f_id" property="id"/>
+        <result column="f_user_id" property="userId"/>
+        <result column="f_before" property="before"/>
+        <result column="f_after" property="after"/>
+        <result column="f_count" property="count"/>
+        <result column="f_category" property="category"/>
+        <result column="f_time" property="time"/>
+    </resultMap>
+    <insert id="create" parameterType="com.hu.hy.domain.JifenRecord">
+insert into m_jifen_record ( f_id,f_user_id,f_before,f_after,f_count,f_category,f_time)
+values (#{id,jdbcType=INTEGER},#{userId,jdbcType=VARCHAR},#{before,jdbcType=INTEGER},#{after,jdbcType=INTEGER},#{count,jdbcType=INTEGER},#{category,jdbcType=VARCHAR},#{time,jdbcType=BIGINT})</insert>
+    <select id="list" resultMap="m_jifen_record">select * from m_jifen_record order by f_id limit #{start},#{size}</select>
+    <select id="getCount" resultType="int">select count(f_id) FROM m_jifen_record</select>
+    <select id="getMaxId" resultType="int">select IFNULL(max(f_id),10000) FROM m_jifen_record</select>
+</mapper>

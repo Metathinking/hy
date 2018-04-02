@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hu.hy.repository.BaiduUserRepository">
+    <resultMap id="m_baidu_user" type="com.hu.hy.domain.BaiduUser">
+        <id column="f_id" property="id"/>
+        <result column="f_uid" property="uid"/>
+        <result column="f_uname" property="uname"/>
+        <result column="f_portrait" property="portrait"/>
+        <result column="f_status" property="status"/>
+        <result column="f_time" property="time"/>
+    </resultMap>
+    <insert id="create" parameterType="com.hu.hy.domain.BaiduUser">
+insert into m_baidu_user ( f_id,f_uid,f_uname,f_portrait,f_status,f_time)
+values (#{id,jdbcType=INTEGER},#{uid,jdbcType=VARCHAR},#{uname,jdbcType=VARCHAR},#{portrait,jdbcType=VARCHAR},
+#{status,jdbcType=VARCHAR},#{time,jdbcType=BIGINT})
+</insert>
+    <update id="update" parameterType="com.hu.hy.domain.BaiduUser">
+update m_baidu_user set f_uname=#{uname,jdbcType=VARCHAR},f_portrait=#{portrait,jdbcType=VARCHAR} where f_id=#{id}
+</update>
+    <update id="updateStatus">
+        UPDATE m_baidu_user set f_status=#{status,jdbcType=VARCHAR} WHERE f_id=#{id}
+    </update>
+    <select id="list" resultMap="m_baidu_user">
+select * from m_baidu_user order by f_id limit #{start},#{size}
+</select>
+    <select id="findById" resultMap="m_baidu_user">select * from m_baidu_user where f_id=#{id}</select>
+    <select id="findByBaiduId" resultMap="m_baidu_user">select * from m_baidu_user where f_uid=#{uid}</select>
+    <select id="getCount" resultType="int">select count(f_id) FROM m_baidu_user where 1=1
+<if test="startTiem!=null and startTime!='' ">
+    <![CDATA[ and  f_time>=#{startTime}]]>
+</if>
+<if test="endTime!=null and endTime!='' ">
+    <![CDATA[ and f_time<=#{endTime}]]>
+</if>
+</select>
+    <select id="getMaxId" resultType="int">select IFNULL(max(f_id),1000000) FROM m_baidu_user</select>
+</mapper>

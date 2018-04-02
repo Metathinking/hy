@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hu.hy.repository.RechargeRecordRepository">
+    <resultMap id="m_recharge_record" type="com.hu.hy.domain.RechargeRecord">
+        <id column="f_id" property="id"/>
+        <result column="f_user_id" property="userId"/>
+        <result column="f_money" property="money"/>
+        <result column="f_bean" property="bean"/>
+        <result column="f_time" property="time"/>
+        <result column="f_remark" property="remark"/>
+    </resultMap>
+    <insert id="create" parameterType="com.hu.hy.domain.RechargeRecord">
+insert into m_recharge_record ( f_id,f_user_id,f_money,f_bean,f_time,f_remark)
+values (#{id,jdbcType=INTEGER},#{userId,jdbcType=VARCHAR},#{money,jdbcType=INTEGER},
+#{bean,jdbcType=INTEGER},#{time,jdbcType=BIGINT},#{remark,jdbcType=VARCHAR})
+</insert>
+    <select id="list" resultMap="m_recharge_record">
+select * from m_recharge_record order by f_id limit #{start},#{size}
+</select>
+    <select id="getCount" resultType="int">select count(f_id) FROM m_recharge_record</select>
+    <select id="getMaxId" resultType="int">select IFNULL(max(f_id),10000) FROM m_recharge_record</select>
+</mapper>

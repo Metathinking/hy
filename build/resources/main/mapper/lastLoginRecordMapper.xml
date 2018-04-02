@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hu.hy.repository.LastLoginRecordRepository">
+    <resultMap id="m_last_login_record" type="com.hu.hy.domain.LastLoginRecord">
+        <id column="f_id" property="id"/>
+        <result column="f_time" property="time"/>
+        <result column="f_ip" property="ip"/>
+    </resultMap>
+    <insert id="create" parameterType="com.hu.hy.domain.LastLoginRecord">
+insert into m_last_login_record ( f_id,f_time,f_ip)
+values (#{id,jdbcType=VARCHAR},#{time,jdbcType=BIGINT},#{ip,jdbcType=VARCHAR})
+</insert>
+    <update id="update" parameterType="com.hu.hy.domain.LastLoginRecord">
+update m_last_login_record set f_time=#{time,jdbcType=BIGINT},f_ip=#{ip,jdbcType=VARCHAR} where f_id=#{id}
+</update>
+    <select id="list" resultMap="m_last_login_record">select * from m_last_login_record order by f_id limit #{start},#{size}</select>
+    <select id="findById" resultMap="m_last_login_record">select * from m_last_login_record where f_id=#{id}</select>
+    <select id="getCount" resultType="int">select count(f_id) FROM m_last_login_record</select>
+</mapper>

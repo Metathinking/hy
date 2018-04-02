@@ -1,0 +1,29 @@
+package com.hu.hy.repository;
+
+import com.hu.hy.domain.FreeBeanSetting;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * 类的功能，目的，描述等写在此处
+ *
+ * @author 胡玉波
+ * @version 1.0
+ * @(#) FreeBeanSettingRepository.java 2017/03/19 23:15
+ */
+@Repository
+public interface FreeBeanSettingRepository {
+
+    void create(FreeBeanSetting freeBeanSetting);
+
+    void update(FreeBeanSetting freeBeanSetting);
+
+    FreeBeanSetting findById(String id);
+
+    List<FreeBeanSetting> list(Map<String,Object> parameters);
+
+    int getCount(Map<String,Object> parameters);
+
+}

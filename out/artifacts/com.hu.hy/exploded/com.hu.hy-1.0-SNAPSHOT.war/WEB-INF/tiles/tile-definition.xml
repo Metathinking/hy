@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dts/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="adminBaseLayout" template="/WEB-INF/tiles/template/adminBaseLayout.jsp">
+        <put-attribute name="content" value=""/>
+    </definition>
+
+    <definition name="admin/user-manager" extends="adminBaseLayout">
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/user-manager.jsp"/>
+    </definition>
+
+    <definition name="admin/recharge" extends="adminBaseLayout">
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/recharge.jsp"/>
+    </definition>
+
+    <definition name="admin/site-info-edit" extends="adminBaseLayout">
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/site-info-edit.jsp"/>
+    </definition>
+    <definition name="admin/manager-login-log" extends="adminBaseLayout">
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/manager-login-log.jsp"/>
+    </definition>
+    <definition name="admin/site-setting-edit" extends="adminBaseLayout">
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/site-setting-edit.jsp"/>
+    </definition>
+    <definition name="admin/manager" extends="adminBaseLayout">
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/manager.jsp"/>
+    </definition>
+    <definition name="admin/power" extends="adminBaseLayout">
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/power.jsp"/>
+    </definition>
+    <definition name="admin/home" extends="adminBaseLayout">
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/home.jsp"/>
+    </definition>
+</tiles-definitions>

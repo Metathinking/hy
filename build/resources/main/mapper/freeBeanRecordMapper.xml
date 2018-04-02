@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hu.hy.repository.FreeBeanRecordRepository">
+    <resultMap id="m_free_bean_record" type="com.hu.hy.domain.FreeBeanRecord">
+        <id column="f_id" property="id"/>
+        <result column="f_user_id" property="userId"/>
+        <result column="f_see_id" property="seeId"/>
+        <result column="f_see_name" property="seeName"/>
+        <result column="f_time" property="time"/>
+    </resultMap>
+    <insert id="create" parameterType="com.hu.hy.domain.FreeBeanRecord">
+insert into m_free_bean_record ( f_id,f_user_id,f_see_id,f_see_name,f_time)
+values (#{id,jdbcType=INTEGER},#{userId,jdbcType=INTEGER},#{seeId,jdbcType=INTEGER},
+#{seeName,jdbcType=VARCHAR},#{time,jdbcType=BIGINT})
+</insert>
+    <select id="list" resultMap="m_free_bean_record">select * from m_free_bean_record order by f_id limit #{start},#{size}</select>
+    <select id="findById" resultMap="m_free_bean_record">select * from m_free_bean_record where f_id=#{id}</select>
+    <select id="getCount" resultType="int">select count(f_id) FROM m_free_bean_record</select>
+    <select id="getMaxId" resultType="int">select IFNULL(max(f_id),10000) FROM m_free_bean_record</select>
+</mapper>

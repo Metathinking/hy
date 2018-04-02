@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hu.hy.repository.SiteSettingRepository">
+    <resultMap id="m_site_setting" type="com.hu.hy.domain.SiteSetting">
+        <id column="f_id" property="id"/>
+        <result column="f_register_dou" property="registerDou"/>
+        <result column="f_sign_in_start" property="signInStart"/>
+        <result column="f_sign_in_step" property="signInStep"/>
+        <result column="f_sign_in_end" property="signInEnd"/>
+        <result column="f_scale" property="scale"/>
+        <result column="f_time" property="time"/>
+    </resultMap>
+    <insert id="create" parameterType="com.hu.hy.domain.SiteSetting">
+insert into m_site_setting ( f_id,f_register_dou,f_sign_in_start,f_sign_in_step,f_sign_in_end,f_scale,f_time)
+values (#{id,jdbcType=INTEGER},#{registerDou,jdbcType=INTEGER},#{signInStart,jdbcType=INTEGER},
+#{signInStep,jdbcType=INTEGER},#{signInEnd,jdbcType=INTEGER},#{scale,jdbcType=INTEGER},
+#{time,jdbcType=BIGINT})
+</insert>
+    <update id="update" parameterType="com.hu.hy.domain.SiteSetting">
+update m_site_setting set f_register_dou=#{registerDou,jdbcType=INTEGER},
+f_sign_in_start=#{signInStart,jdbcType=INTEGER},f_sign_in_step=#{signInStep,jdbcType=INTEGER},
+f_sign_in_end=#{signInEnd,jdbcType=INTEGER},f_scale=#{scale,jdbcType=INTEGER},
+f_time=#{time,jdbcType=BIGINT} where f_id=#{id}
+</update>
+    <select id="findById" resultMap="m_site_setting">select * from m_site_setting where f_id=#{id}</select>
+</mapper>

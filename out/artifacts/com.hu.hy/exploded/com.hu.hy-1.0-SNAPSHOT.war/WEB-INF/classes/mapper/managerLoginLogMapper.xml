@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hu.hy.repository.ManagerLoginLogRepository">
+    <resultMap id="m_manager_login_log" type="com.hu.hy.domain.ManagerLoginLog">
+        <id column="f_id" property="id"/>
+        <result column="f_manager_id" property="managerId"/>
+        <result column="f_manager_name" property="managerName"/>
+        <result column="f_ip" property="ip"/>
+        <result column="f_time" property="time"/>
+    </resultMap>
+    <insert id="create" parameterType="com.hu.hy.domain.ManagerLoginLog">
+insert into m_manager_login_log ( f_id,f_manager_id,f_manager_name,f_ip,f_time)
+values (#{id,jdbcType=INTEGER},#{managerId,jdbcType=INTEGER},#{managerName,jdbcType=VARCHAR},#{ip,jdbcType=VARCHAR},#{time,jdbcType=BIGINT})
+</insert>
+    <select id="list" resultMap="m_manager_login_log">
+select * from m_manager_login_log order by f_id desc
+ limit #{start},#{size}
+</select>
+    <select id="getCount" resultType="int">select count(f_id) FROM m_manager_login_log</select>
+    <select id="getMaxId" resultType="int">select IFNULL(max(f_id),10000) FROM m_manager_login_log</select>
+</mapper>

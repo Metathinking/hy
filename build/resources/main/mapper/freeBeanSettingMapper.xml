@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hu.hy.repository.FreeBeanSettingRepository">
+    <resultMap id="m_free_bean_setting" type="com.hu.hy.domain.FreeBeanSetting">
+        <id column="f_id" property="id"/>
+        <result column="f_start_count" property="startCount"/>
+        <result column="f_count" property="count"/>
+        <result column="f_open" property="open"/>
+        <result column="f_time" property="time"/>
+    </resultMap>
+    <insert id="create" parameterType="com.hu.hy.domain.FreeBeanSetting">
+insert into m_free_bean_setting ( f_id,f_start_count,f_count,f_open,f_time)
+values (#{id,jdbcType=VARCHAR},#{startCount,jdbcType=INTEGER},#{count,jdbcType=INTEGER},
+#{open,jdbcType=TINYINT},#{time,jdbcType=BIGINT})
+</insert>
+    <update id="update" parameterType="com.hu.hy.domain.FreeBeanSetting">
+update m_free_bean_setting set f_start_count=#{startCount,jdbcType=INTEGER},
+f_count=#{count,jdbcType=INTEGER},f_open=#{open,jdbcType=TINYINT},f_time=#{time,jdbcType=BIGINT}
+where f_id=#{id}</update>
+    <select id="list" resultMap="m_free_bean_setting">
+select * from m_free_bean_setting order by f_id limit #{start},#{size}
+</select>
+    <select id="findById" resultMap="m_free_bean_setting">select * from m_free_bean_setting where f_id=#{id}</select>
+    <select id="getCount" resultType="int">select count(f_id) FROM m_free_bean_setting</select>
+</mapper>
